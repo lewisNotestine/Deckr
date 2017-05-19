@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deckr", "Deckr\Deckr.csproj", "{FE8D130A-3A34-4696-B2ED-679D705B7639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deckr.Console", "Deckr.Console\Deckr.Console.csproj", "{791DB202-DF7A-4021-AA63-3721026FEDFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deckr.Tests", "Deckr.Tests\Deckr.Tests.csproj", "{4857FFA0-A276-40BC-BE0C-CA5754D59678}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE8D130A-3A34-4696-B2ED-679D705B7639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8D130A-3A34-4696-B2ED-679D705B7639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8D130A-3A34-4696-B2ED-679D705B7639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8D130A-3A34-4696-B2ED-679D705B7639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{791DB202-DF7A-4021-AA63-3721026FEDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{791DB202-DF7A-4021-AA63-3721026FEDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{791DB202-DF7A-4021-AA63-3721026FEDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{791DB202-DF7A-4021-AA63-3721026FEDFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4857FFA0-A276-40BC-BE0C-CA5754D59678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4857FFA0-A276-40BC-BE0C-CA5754D59678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4857FFA0-A276-40BC-BE0C-CA5754D59678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4857FFA0-A276-40BC-BE0C-CA5754D59678}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
