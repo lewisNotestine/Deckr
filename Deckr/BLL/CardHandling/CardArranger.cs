@@ -6,18 +6,18 @@ namespace Deckr.BLL.CardHandling
 {
     internal class CardArranger : ICardArranger
     {
-        private readonly IComparer<Card> Shuffler;
+        private readonly Func<IComparer<Card>> GetShufflerFunc;
         private readonly IComparer<Card> Sorter;
 
-        public CardArranger(IComparer<Card> shuffler, IComparer<Card> sorter)
+        public CardArranger(Func<IComparer<Card>> getShufflerFunc, IComparer<Card> sorter)
         {
-            Shuffler = shuffler;
+            GetShufflerFunc = getShufflerFunc;
             Sorter = sorter;
         }
          
         public Deck ShuffleDeck(Deck input)
         {
-            return new Deck(new SortedSet<Card>(input.Cards, CardShuffler.GetDefault()));
+            return new Deck(new SortedSet<Card>(input.Cards, GetShufflerFunc()));
         }
 
         public Deck SortDeck(Deck input)

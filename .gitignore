@@ -1,0 +1,13 @@
+
+bin/
+obj/
+
+*.min.js
+*.dll
+*.pdb
+*.css.min
+*.css.map
+*.min.map
+
+
+*.userprefs

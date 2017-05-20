@@ -25,7 +25,7 @@ namespace Deckr
 
         public static IDeckr GetDefault()
         {
-            return new Deckr(new CardArranger(CardShuffler.GetDefault(), new CardSorter()), new DeckFactory());
+            return new Deckr(new CardArranger(() => CardShuffler.GetDefault(), new CardSorter()), new DeckFactory());
         }
 
         public Deck GetDeck()
