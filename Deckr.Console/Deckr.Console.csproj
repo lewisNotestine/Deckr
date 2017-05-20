@@ -6,14 +6,12 @@
   </PropertyGroup>
 
     <ItemGroup>
-    <ProjectReference Include="..\Deckr\Deckr.csproj">
-    </ProjectReference>
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="CommandLine\" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="CoreCompat.System.ComponentModel.Attributes" Version="4.2.3-rg" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Deckr\Deckr.csproj" />
     </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Deckr
+namespace Deckr.Web
 {
     public class Startup
     {
@@ -29,6 +29,8 @@ namespace Deckr
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddScoped<IDeckr>(sp => Deckr.GetDefault());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,15 @@
+﻿@using Deckr.Web.Models.Home
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Deckr - your source for cards";
+}
+<div>
+    <h1>DECKR</h1>
+	<h4>Deck:</h4>
+	<ul>
+    @foreach (var card in Model.Cards) {
+	    <li><span>@card.SuitSymbol</span><span>@card.RankSymbol</span></li>     
+	}
+	</ul>
+</div>

@@ -16,4 +16,11 @@
 
  
 
+  <ItemGroup>
+    <ProjectReference Include="..\Deckr\Deckr.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Models\Home\" />
+  </ItemGroup>
 </Project>
