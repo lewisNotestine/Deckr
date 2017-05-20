@@ -13,4 +13,7 @@
     <ItemGroup>
       <Folder Include="CommandLine\" />
     </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="CoreCompat.System.ComponentModel.Attributes" Version="4.2.3-rg" />
+    </ItemGroup>
 </Project>

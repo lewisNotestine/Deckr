@@ -92,5 +92,45 @@ namespace Deckr.Tests.BLL.CardHandling
             Assert.Collection<Card>(deck.Cards, c => Assert.True(c.Rank == Rank.Deuce), d => Assert.True(d.Rank == Rank.Three), e => Assert.True(e.Rank == Rank.Four));
 
 		}
+
+        [Fact]
+        public void Shuffles_NullDeck_ThrowsArgException()
+        {
+            Deck deck = null;
+
+            var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+
+            Assert.Throws<ArgumentNullException>(() => arrangerUnderTest.ShuffleDeck(deck));
+        }
+
+        [Fact]
+        public void Shuffles_DeckWithNoCards_ThrowsArgException()
+        {
+			Deck deck = new Deck(null); ;
+
+			var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+
+			Assert.Throws<ArgumentNullException>(() => arrangerUnderTest.ShuffleDeck(deck));
+        }
+
+		[Fact]
+		public void Sorts_NullDeck_ThrowsArgException()
+		{
+			Deck deck = null;
+
+			var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+
+            Assert.Throws<ArgumentNullException>(() => arrangerUnderTest.SortDeck(deck));
+		}
+
+		[Fact]
+		public void Sorts_DeckWithNoCards_ThrowsArgException()
+		{
+			Deck deck = new Deck(null); ;
+
+			var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+
+            Assert.Throws<ArgumentNullException>(() => arrangerUnderTest.SortDeck(deck));
+		}
     }
 }

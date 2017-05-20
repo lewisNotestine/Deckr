@@ -17,11 +17,19 @@ namespace Deckr.BLL.CardHandling
          
         public void ShuffleDeck(Deck input)
         {
+            if (input?.Cards == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
             input.Cards.Sort(GetShufflerFunc());
         }
 
         public void SortDeck(Deck input)
-        {            
+        {
+			if (input?.Cards == null)
+			{
+                throw new ArgumentNullException(nameof(input));
+			}
             input.Cards.Sort(Sorter);
         }
 

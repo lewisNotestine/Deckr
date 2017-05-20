@@ -1,18 +1,11 @@
-﻿using System;
-using Deckr;
-using Deckr.BLL.Cards;
+﻿using Deckr.BLL.Cards;
 
 namespace Deckr.Console.CommandLine
 {
-    public class CmdLine
+    internal class CmdLine
     {
-        private const string CREATEDECK = "1";
-        private const string SORTDECK = "2";
-        private const string SHUFFLEDECK = "3";
-        private const string EXIT = "4";
-
         private readonly IDeckr Deckr;
-        private readonly DeckPrinter Printer;
+        private readonly IConsoleWrapper Printer;
 
         private Deck CurrentDeck;
         private bool DeckExists
@@ -23,62 +16,44 @@ namespace Deckr.Console.CommandLine
             }
         }
 
-        public CmdLine(IDeckr deckr, DeckPrinter printer)
+        public CmdLine(IDeckr deckr, IConsoleWrapper printer)
         {
             Deckr = deckr;
             Printer = printer;
         }
 
-        public void PrintUsage()
+        public void DisplayOptions()
         {
-            System.Console.Write(
-$@"
-----------------
-Usage: 
-----------------
-
-{CREATEDECK}. Create a deck
-");
-
-            if (DeckExists)
-            {
-                System.Console.Write(
-$@"{SORTDECK}. Sort the deck
-
-{SHUFFLEDECK}. Shuffle the deck 
-
-");
-            }
-
-            System.Console.Write(
-$@"{EXIT}. Exit
-
-");
+            Printer.PrintUsage(DeckExists);
         }
 
         public CmdLineAction TakeInstructions()
         {
-            var instruction = System.Console.ReadKey().KeyChar.ToString();
+            var instruction = Printer.TakeUserInput();
             switch (instruction)
             {
-                case CREATEDECK:
+                case ConsoleWrapper.CREATEDECK:
                     return CmdLineAction.CreateDeck;
-                case SORTDECK:
+
+                case ConsoleWrapper.SORTDECK:
                     if (!DeckExists)
-                    {
-                        System.Console.WriteLine("must create a deck first");
+                    {                      
+                        Printer.PrintDeckMissing();
                         return CmdLineAction.Invalid;
                     }
                     return CmdLineAction.SortDeck;
-                case SHUFFLEDECK:
+
+                case ConsoleWrapper.SHUFFLEDECK:
                     if (!DeckExists)
                     {
-                        System.Console.WriteLine("must create a deck first");
+                        Printer.PrintDeckMissing();
                         return CmdLineAction.Invalid;
                     }
                     return CmdLineAction.ShuffleDeck;
-                case EXIT:
+
+                case ConsoleWrapper.EXIT:
                     return CmdLineAction.Quit;
+
                 default:
                     return CmdLineAction.Invalid;
             }
@@ -86,30 +61,25 @@ $@"{EXIT}. Exit
 
         public void ExecuteInstructions(CmdLineAction action)
         {
+            Printer.PrintAction(action);
+
             switch (action)
             {
-                case CmdLineAction.CreateDeck:
-                    System.Console.WriteLine($"\nCreating Deck!\n");
+                case CmdLineAction.CreateDeck:                    
                     CurrentDeck = Deckr.GetDeck();
                     Printer.PrintDeck(CurrentDeck);
                     break;
-                case CmdLineAction.SortDeck:
-                    System.Console.WriteLine($"\nSorting Deck!\n");
+
+                case CmdLineAction.SortDeck:                    
                     Deckr.SortDeck(CurrentDeck);
                     Printer.PrintDeck(CurrentDeck);
                     break;
-                case CmdLineAction.ShuffleDeck:
-                    System.Console.WriteLine($"\nShuffling Deck!\n");
+
+                case CmdLineAction.ShuffleDeck:                    
                     Deckr.ShuffleDeck(CurrentDeck);
                     Printer.PrintDeck(CurrentDeck);
                     break;
-                case CmdLineAction.Invalid:
-                    System.Console.Write(
-$@"
-Invalid Input.
-");
 
-                    break;
                 default:
                     break;
             }

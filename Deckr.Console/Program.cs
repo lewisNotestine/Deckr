@@ -7,11 +7,11 @@ namespace Deckr.Console
     {
         static void Main(string[] args)
         {
-            var cmdLine = new CmdLine(Deckr.GetDefault(), new DeckPrinter());
+            var cmdLine = new CmdLine(Deckr.GetDefault(), new ConsoleWrapper());
             CmdLineAction currentAction;
             do
             {
-                cmdLine.PrintUsage();
+                cmdLine.DisplayOptions();
                 currentAction = cmdLine.TakeInstructions();
                 cmdLine.ExecuteInstructions(currentAction);
             }
