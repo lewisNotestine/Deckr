@@ -4,9 +4,9 @@ namespace Deckr.BLL.CardHandling
 {
 	internal interface ICardArranger
 	{
-		Deck ShuffleDeck(Deck input);
+		void ShuffleDeck(Deck input);
 
-		Deck SortDeck(Deck input);
+		void SortDeck(Deck input);
 	}
 
 }

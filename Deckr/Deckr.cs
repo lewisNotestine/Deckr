@@ -33,14 +33,14 @@ namespace Deckr
             return DeckFactory.GenerateDeck();
         }
 
-        public Deck ShuffleDeck(Deck inputDeck)
+        public void ShuffleDeck(Deck inputDeck)
         {
-            return CardArranger.ShuffleDeck(inputDeck);
+            CardArranger.ShuffleDeck(inputDeck);
         }
 
-        public Deck SortDeck(Deck inputDeck)
+        public void SortDeck(Deck inputDeck)
         {
-            return CardArranger.SortDeck(inputDeck);
+            CardArranger.SortDeck(inputDeck);
         }
     }
 }

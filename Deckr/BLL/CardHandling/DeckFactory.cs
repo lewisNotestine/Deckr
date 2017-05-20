@@ -8,7 +8,7 @@ namespace Deckr.BLL.CardHandling
     {
         public Deck GenerateDeck()
         {
-            return new Deck(new HashSet<Card>(GenerateCards()));
+            return new Deck(new List<Card>(GenerateCards()));
         }
 
         private IEnumerable<Card> GenerateCards()

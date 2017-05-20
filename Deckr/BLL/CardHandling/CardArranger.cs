@@ -15,14 +15,14 @@ namespace Deckr.BLL.CardHandling
             Sorter = sorter;
         }
          
-        public Deck ShuffleDeck(Deck input)
+        public void ShuffleDeck(Deck input)
         {
-            return new Deck(new SortedSet<Card>(input.Cards, GetShufflerFunc()));
+            input.Cards.Sort(GetShufflerFunc());
         }
 
-        public Deck SortDeck(Deck input)
-        {
-            return new Deck(new SortedSet<Card>(input.Cards, Sorter));
+        public void SortDeck(Deck input)
+        {            
+            input.Cards.Sort(Sorter);
         }
 
   

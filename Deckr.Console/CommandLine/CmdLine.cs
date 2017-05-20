@@ -15,6 +15,13 @@ namespace Deckr.Console.CommandLine
         private readonly DeckPrinter Printer;
 
         private Deck CurrentDeck;
+        private bool DeckExists
+        {
+            get
+            {
+                return CurrentDeck != null;
+            }
+        }
 
         public CmdLine(IDeckr deckr, DeckPrinter printer)
         {
@@ -28,10 +35,23 @@ namespace Deckr.Console.CommandLine
 $@"
 ----------------
 Usage: 
+----------------
+
 {CREATEDECK}. Create a deck
-{SORTDECK}. Sort the deck (once created)
-{SHUFFLEDECK}. Shuffle the deck (once created)
-{EXIT}. Exit 
+");
+
+            if (DeckExists)
+            {
+                System.Console.Write(
+$@"{SORTDECK}. Sort the deck
+
+{SHUFFLEDECK}. Shuffle the deck 
+
+");
+            }
+
+            System.Console.Write(
+$@"{EXIT}. Exit
 
 ");
         }
@@ -44,13 +64,23 @@ Usage:
                 case CREATEDECK:
                     return CmdLineAction.CreateDeck;
                 case SORTDECK:
-                    return CmdLineAction.SortDeck;             
+                    if (!DeckExists)
+                    {
+                        System.Console.WriteLine("must create a deck first");
+                        return CmdLineAction.Invalid;
+                    }
+                    return CmdLineAction.SortDeck;
                 case SHUFFLEDECK:
+                    if (!DeckExists)
+                    {
+                        System.Console.WriteLine("must create a deck first");
+                        return CmdLineAction.Invalid;
+                    }
                     return CmdLineAction.ShuffleDeck;
                 case EXIT:
                     return CmdLineAction.Quit;
                 default:
-                    return CmdLineAction.Invalid;                    
+                    return CmdLineAction.Invalid;
             }
         }
 
@@ -59,30 +89,30 @@ Usage:
             switch (action)
             {
                 case CmdLineAction.CreateDeck:
-					System.Console.WriteLine($"\nCreating Deck!\n");
-					CurrentDeck = Deckr.GetDeck();
+                    System.Console.WriteLine($"\nCreating Deck!\n");
+                    CurrentDeck = Deckr.GetDeck();
                     Printer.PrintDeck(CurrentDeck);
-					break;
+                    break;
                 case CmdLineAction.SortDeck:
-					System.Console.WriteLine($"\nSorting Deck!\n");					
-					CurrentDeck = Deckr.SortDeck(CurrentDeck);
+                    System.Console.WriteLine($"\nSorting Deck!\n");
+                    Deckr.SortDeck(CurrentDeck);
                     Printer.PrintDeck(CurrentDeck);
-					break;
+                    break;
                 case CmdLineAction.ShuffleDeck:
-					System.Console.WriteLine($"\nShuffling Deck!\n");
-					CurrentDeck = Deckr.ShuffleDeck(CurrentDeck);
+                    System.Console.WriteLine($"\nShuffling Deck!\n");
+                    Deckr.ShuffleDeck(CurrentDeck);
                     Printer.PrintDeck(CurrentDeck);
                     break;
                 case CmdLineAction.Invalid:
-                    System.Console.WriteLine($"Invalid Input.");
+                    System.Console.Write(
+$@"
+Invalid Input.
+");
 
                     break;
                 default:
-                    break;                    
-			}
-
-            PrintUsage();
-            
+                    break;
+            }
         }
     }
 }

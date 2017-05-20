@@ -7,8 +7,8 @@ namespace Deckr
     {
         Deck GetDeck();
 
-        Deck SortDeck(Deck inputDeck);
+        void SortDeck(Deck inputDeck);
 
-        Deck ShuffleDeck(Deck inputDeck);
+        void ShuffleDeck(Deck inputDeck);
     }
 }

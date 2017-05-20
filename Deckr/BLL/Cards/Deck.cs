@@ -4,9 +4,9 @@ namespace Deckr.BLL.Cards
 {
     public class Deck
     {
-        public ISet<Card> Cards {get;}
+        public List<Card> Cards {get;}
 
-        public Deck(ISet<Card> cards)
+        public Deck(List<Card> cards)
         {
             Cards = cards;
         }    

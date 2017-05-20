@@ -11,8 +11,8 @@ namespace Deckr.Console
             CmdLineAction currentAction;
             do
             {
+                cmdLine.PrintUsage();
                 currentAction = cmdLine.TakeInstructions();
-
                 cmdLine.ExecuteInstructions(currentAction);
             }
             while (currentAction != CmdLineAction.Quit);
