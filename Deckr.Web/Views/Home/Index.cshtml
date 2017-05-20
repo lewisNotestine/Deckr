@@ -7,9 +7,16 @@
 <div>
     <h1>DECKR</h1>
 	<h4>Deck:</h4>
-	<ul>
-    @foreach (var card in Model.Cards) {
-	    <li><span>@card.SuitSymbol</span><span>@card.RankSymbol</span></li>     
-	}
-	</ul>
+
+	<form action="/Home/Index" method="post">
+	    <input type="radio" name="inputChoice" value="Shuffle" checked="checked"><label for="Shuffle">Shuffle Deck</label>
+		<input type="radio" name="inputChoice" value="Sort"><label for="Sort">Sort Deck</label>
+		<input type="submit" />
+                
+		<ul>
+	    @foreach (var card in Model.Cards) {
+		    <li><span>@card.SuitSymbol</span><span>@card.RankSymbol</span></li>     
+		}
+		</ul>
+	</form>
 </div>
