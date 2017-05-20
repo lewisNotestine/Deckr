@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deckr.Tests", "Deckr.Tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deckr.Console.Tests", "Deckr.Console.Tests\Deckr.Console.Tests.csproj", "{00F226D7-359B-4D1F-A1FE-FFD215A5B94C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deckr.Web", "Deckr.WebUI\Deckr.Web.csproj", "{9399A473-835E-4ACA-B72D-CCCA00E1D57D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{00F226D7-359B-4D1F-A1FE-FFD215A5B94C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00F226D7-359B-4D1F-A1FE-FFD215A5B94C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00F226D7-359B-4D1F-A1FE-FFD215A5B94C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9399A473-835E-4ACA-B72D-CCCA00E1D57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9399A473-835E-4ACA-B72D-CCCA00E1D57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9399A473-835E-4ACA-B72D-CCCA00E1D57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9399A473-835E-4ACA-B72D-CCCA00E1D57D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
