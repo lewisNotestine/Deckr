@@ -1,22 +1,14 @@
-﻿@using Deckr.Web.Models.Home
-@model IndexModel
-
-@{
-    ViewData["Title"] = "Deckr - your source for cards";
-}
-<div>
+﻿<div>
     <h1>DECKR</h1>
-	<h4>Deck:</h4>
-
-	<form action="/Home/Index" method="post">
-	    <input type="radio" name="inputChoice" value="Shuffle" checked="checked"><label for="Shuffle">Shuffle Deck</label>
-		<input type="radio" name="inputChoice" value="Sort"><label for="Sort">Sort Deck</label>
-		<input type="submit" />
-                
-		<ul>
-	    @foreach (var card in Model.Cards) {
-		    <li><span>@card.SuitSymbol</span><span>@card.RankSymbol</span></li>     
-		}
-		</ul>
-	</form>
+	
+	    <button type="button" data-bind="click: shuffleCards">Shuffle</button>
+        <button type="button" data-bind="click: sortCards">Sort</button>
+        <hr/>
+		<div class="card-container">
+	        <!-- ko foreach: cards -->
+			<div class="card-display">
+				<span data-bind="text : $data.suitSymbol + ' ' + $data.rankSymbol, css : { redSuit : $data.suit == 'Hearts' || $data.suit == 'Diamonds', blackSuit: $data.suit == 'Clubs' || $data.suit == 'Spades' } "></span>
+			</div>
+			<!-- /ko -->
+        </div>
 </div>

@@ -1,10 +1,54 @@
 ﻿body { 
-    font-family: 'Bungee';
+    font-family: 'Bungee Shade';
+    background-color: forestgreen;
 }
 
 h1 {
-    font-family: 'Bungee Shade';
     font-size: 4rem;
+    margin: 0;
+}
+
+button {
+    font-family: 'Bungee Shade';
+    font-size: 2rem;
+    width: 16rem;
+    max-width: 50%;
+    background-color: yellow;
+    border-radius: 1rem;
+    box-shadow: inset;
+}
+
+    button:focus {
+        outline: none;
+    }
+
+.card-container {
+    width: 85%;
+    max-width: 62rem;
+    margin: auto;
+}
+
+.card-display {
+    display: inline-flex;
+    flex-flow: row;
+    min-width: 4rem;
+    min-height: 6rem;
+    margin: .2rem;
+    background-color: #fff;
+    border-radius: .1rem;
+    font-family: 'Bungee'
+}
+
+    .card-display span {
+        margin: auto;
+    }
+
+.redSuit {
+    color: red;
+}
+
+.blackSuit {
+    color: black;
 }
 
 /* Wrapping element */

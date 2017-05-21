@@ -1,9 +1,11 @@
 ﻿﻿using System;
 using System.Collections.Generic;
-using Deckr.Extensions;
+using Deckr.BLL.Cards;
+using Deckr.Web.Extensions;
 using Deckr.Web.Models.Home;
 using Deckr.Web.Models.Home.InputModels;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Deckr.Web.Controllers
 {
@@ -19,22 +21,51 @@ namespace Deckr.Web.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            var deck = Deckr.GetDeck();
-
-            var cardList = new List<CardModel>();
-            foreach (var card in deck.Cards)
-            {
-                cardList.Add(new CardModel(card.Suit.ToString(), card.Suit.GetDescription(), card.Rank.ToString(), card.Rank.GetDescription()));
-            }
-
-            return View(viewName: "Index", model: new IndexModel(cardList));
+            return View(viewName: "Index");
         }
 
-        [HttpPost]
-        public ViewResult Index(string inputChoice)
+        [HttpGet]
+        public JsonResult GetCards()
         {
-            var deck = Deckr.GetDeck();
-            InputChoice choice = (InputChoice) Enum.Parse(typeof(InputChoice), inputChoice);
+            try
+            {
+                var deck = Deckr.GetDeck();
+                var deckModel = deck.GetDeckModel();
+
+                if (TempData.ContainsKey("Deck"))
+                {
+                    TempData["Deck"] = JsonConvert.SerializeObject(deckModel);
+                }
+                else
+                {
+                    TempData.Add("Deck", JsonConvert.SerializeObject(deckModel));
+                }
+
+                return Json(deckModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+		}
+
+        [HttpPost]
+        public JsonResult UpdateCards(string inputChoice)
+        {            
+            Deck deck;
+
+            if (TempData.ContainsKey("Deck"))
+            {
+                var existingDeckModel = JsonConvert.DeserializeObject<DeckModel>(TempData["Deck"] as string) as DeckModel;
+                deck = existingDeckModel.GetDeck();
+            }
+            else
+            {
+                deck = Deckr.GetDeck();
+            }
+
+            InputChoice choice = (InputChoice)Enum.Parse(typeof(InputChoice), inputChoice);
+
             switch (choice)
             {
                 case InputChoice.Shuffle:
@@ -46,17 +77,22 @@ namespace Deckr.Web.Controllers
                     break;
 
                 default:
-                    break;                    
+                    break;
             }
 
-			var cardList = new List<CardModel>();
-			foreach (var card in deck.Cards)
+            var deckModel = deck.GetDeckModel();
+
+			if (TempData.ContainsKey("Deck"))
 			{
-				cardList.Add(new CardModel(card.Suit.ToString(), card.Suit.GetDescription(), card.Rank.ToString(), card.Rank.GetDescription()));
+                TempData["Deck"] = JsonConvert.SerializeObject(deckModel);
+			}
+			else
+			{
+                TempData.Add("Deck", JsonConvert.SerializeObject(deckModel));
 			}
 
 
-			return View(viewName: "Index", model: new IndexModel(cardList));
+            return Json(deckModel);
         }
     }
 }
