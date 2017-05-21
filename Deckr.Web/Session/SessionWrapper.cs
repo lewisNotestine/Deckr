@@ -1,6 +1,5 @@
 ﻿using System;
 using Deckr.Web.Models.Home;
-using Deckr.Web.Extensions;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 
@@ -8,11 +7,13 @@ namespace Deckr.Web.Session
 {
     public class SessionWrapper : ISessionWrapper
     {
+        private const string DECK_KEY = "Deck";
+
         public DeckModel GetDeckFromTempData(ITempDataDictionary tempData, Func<DeckModel> generateIfSessionMissed)
         {
-			if (tempData.ContainsKey("Deck"))
+            if (tempData.ContainsKey(DECK_KEY))
 			{
-				return JsonConvert.DeserializeObject<DeckModel>(tempData["Deck"] as string) as DeckModel;				
+                return JsonConvert.DeserializeObject<DeckModel>(tempData[DECK_KEY] as string) as DeckModel;				
 			}
 			else
 			{
@@ -22,13 +23,13 @@ namespace Deckr.Web.Session
 
         public void StoreDeckInTempData(DeckModel deckModel, ITempDataDictionary tempData)
         {
-            if (tempData.ContainsKey("Deck"))
+            if (tempData.ContainsKey(DECK_KEY))
             {
-                tempData["Deck"] = JsonConvert.SerializeObject(deckModel);
+                tempData[DECK_KEY] = JsonConvert.SerializeObject(deckModel);
             }
             else
             {
-                tempData.Add("Deck", JsonConvert.SerializeObject(deckModel));
+                tempData.Add(DECK_KEY, JsonConvert.SerializeObject(deckModel));
             }
         }
     }
