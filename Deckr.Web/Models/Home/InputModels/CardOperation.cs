@@ -1,7 +1,7 @@
 ﻿namespace Deckr.Web.Models.Home.InputModels
 
 {
-    public enum InputChoice
+    public enum CardOperation
     {
         Shuffle,
         Sort

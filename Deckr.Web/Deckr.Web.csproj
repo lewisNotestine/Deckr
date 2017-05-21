@@ -24,5 +24,6 @@
     <Folder Include="Models\Home\" />
     <Folder Include="Models\Home\InputModels\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Session\" />
   </ItemGroup>
 </Project>

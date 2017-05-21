@@ -4,6 +4,7 @@ using Deckr.BLL.Cards;
 using Deckr.Web.Extensions;
 using Deckr.Web.Models.Home;
 using Deckr.Web.Models.Home.InputModels;
+using Deckr.Web.Session;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -12,10 +13,12 @@ namespace Deckr.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IDeckr Deckr;
+        private readonly ISessionWrapper SessionWrapper;
 
-        public HomeController(IDeckr deckr)
+        public HomeController(IDeckr deckr, ISessionWrapper sessionWrapper)
         {
             Deckr = deckr;
+            SessionWrapper = sessionWrapper;
         }
 
         [HttpGet]
@@ -27,52 +30,33 @@ namespace Deckr.Web.Controllers
         [HttpGet]
         public JsonResult GetCards()
         {
-            try
-            {
-                var deck = Deckr.GetDeck();
-                var deckModel = deck.GetDeckModel();
+            var deck = Deckr.GetDeck();
+            var deckModel = deck.GetDeckModel();
 
-                if (TempData.ContainsKey("Deck"))
-                {
-                    TempData["Deck"] = JsonConvert.SerializeObject(deckModel);
-                }
-                else
-                {
-                    TempData.Add("Deck", JsonConvert.SerializeObject(deckModel));
-                }
+            SessionWrapper.StoreDeckInTempData(deckModel, TempData);
 
-                return Json(deckModel);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return Json(deckModel);        
 		}
 
         [HttpPost]
         public JsonResult UpdateCards(string inputChoice)
-        {            
-            Deck deck;
-
-            if (TempData.ContainsKey("Deck"))
+        {
+            CardOperation cardOperation;
+            if (!Enum.TryParse<CardOperation>(inputChoice, out cardOperation))
             {
-                var existingDeckModel = JsonConvert.DeserializeObject<DeckModel>(TempData["Deck"] as string) as DeckModel;
-                deck = existingDeckModel.GetDeck();
-            }
-            else
-            {
-                deck = Deckr.GetDeck();
-            }
+                throw new ArgumentException($"{inputChoice} not parsable as card operation");
+            }                            
 
-            InputChoice choice = (InputChoice)Enum.Parse(typeof(InputChoice), inputChoice);
+            Deck deck = SessionWrapper.GetDeckFromTempData(TempData, () => Deckr.GetDeck().GetDeckModel()).GetDeck();
 
-            switch (choice)
+
+            switch (cardOperation)
             {
-                case InputChoice.Shuffle:
+                case CardOperation.Shuffle:
                     Deckr.ShuffleDeck(deck);
                     break;
 
-                case InputChoice.Sort:
+                case CardOperation.Sort:
                     Deckr.SortDeck(deck);
                     break;
 
@@ -82,15 +66,7 @@ namespace Deckr.Web.Controllers
 
             var deckModel = deck.GetDeckModel();
 
-			if (TempData.ContainsKey("Deck"))
-			{
-                TempData["Deck"] = JsonConvert.SerializeObject(deckModel);
-			}
-			else
-			{
-                TempData.Add("Deck", JsonConvert.SerializeObject(deckModel));
-			}
-
+            SessionWrapper.StoreDeckInTempData(deckModel, TempData);
 
             return Json(deckModel);
         }

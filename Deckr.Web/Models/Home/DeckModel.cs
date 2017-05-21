@@ -5,7 +5,7 @@ namespace Deckr.Web.Models.Home
     {
         public CardModel[] Cards { get; set; }
 
-        [Obsolete("For deserialization")]
+        [Obsolete("For deserialization", error: true)]
         public DeckModel()
         {}
 

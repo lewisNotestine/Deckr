@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Deckr.Web.Session;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,8 @@ namespace Deckr.Web
             services.AddMvc();
 
             services.AddScoped<IDeckr>(sp => Deckr.GetDefault());
+            services.AddScoped<ISessionWrapper>(sp => new SessionWrapper());
+
             services.AddMemoryCache();
             services.AddSession();
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();

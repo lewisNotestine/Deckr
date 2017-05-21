@@ -3,7 +3,7 @@ namespace Deckr.Web.Models.Home
 {
 	public class CardModel
 	{
-		[Obsolete("for deserialization only")]
+		[Obsolete("for deserialization only", error: true)]
 		public CardModel()
 		{ }
 
