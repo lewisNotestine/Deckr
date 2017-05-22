@@ -1,0 +1,18 @@
+﻿<div>
+	<header>
+	    <h1>DECKR</h1>	
+		<h2>Sorting and Shuffling as a Service</h2>
+	</header>
+	<div class="button-container">
+	    <button type="button" data-bind="click: shuffleCards">Shuffle</button>
+	    <button type="button" data-bind="click: sortCards">Sort</button>
+	</div>
+    <hr/>
+	<div class="card-container">
+        <!-- ko foreach: cards -->
+		<div class="card-display">
+			<span data-bind="text : $data.suitSymbol + ' ' + $data.rankSymbol, css : { redSuit : $data.suit == 'Hearts' || $data.suit == 'Diamonds', blackSuit: $data.suit == 'Clubs' || $data.suit == 'Spades' } "></span>
+		</div>
+		<!-- /ko -->
+    </div>
+</div>
