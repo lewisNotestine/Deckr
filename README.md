@@ -2,7 +2,7 @@
 Fully featured card shuffling and sorting suite written for .NET Core using .NET Standard v1.6. This is just a little exercise, i used this to test out xUnit, VS 2017 and VS Mac,
 as well as to take the opportunity to dive a little deeper into ASP.NET Core MVC.  
 
-This repo contains the Deckr core project (just called "Deckr"), as well as a command-line app "Deckr.Console" and a basic Web UI "Deckr.Web". 
+This repo contains the Deckr core project (just called "Deckr"), as well as a command-line app "Deckr.Console" and a basic Web UI "Deckr.Web", as well as respective test projects for each of these.
 
 ## Prerequisites:
 This project requires .NET core SDK (was developed with SDK v1.0.3, and .NET Core Framework v.1.1.0) to run. To run the scripts here, .NET CLI will also be required.
