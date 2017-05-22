@@ -1,5 +1,4 @@
 
-**/.vscode/
 bin/
 obj/
 
@@ -9,6 +8,6 @@ obj/
 *.css.min
 *.css.map
 *.min.map
-*.user
+
 
 *.userprefs
