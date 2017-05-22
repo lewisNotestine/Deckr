@@ -56,13 +56,7 @@ namespace Deckr.Web.Tests.Session
         {
             var tempDataMock = new Mock<ITempDataDictionary>(MockBehavior.Strict);
             var serialized = "{\"Cards\":[{\"Suit\":\"Diamonds\",\"SuitSymbol\":\"♦\",\"Rank\":\"Ace\",\"RankSymbol\":\"A\"},{\"Suit\":\"Diamonds\",\"SuitSymbol\":\"♦\",\"Rank\":\"Deuce\",\"RankSymbol\":\"2\"}]}";
-
-			//var cards = new CardModel[]
-			//{
-			//	new CardModel("Diamonds", "♦", "Ace", "A"),
-			//	new CardModel("Diamonds", "♦", "Deuce", "2")
-			//};
-			//var dModel = new DeckModel(cards);
+            			
             var sessionWrapperUnderTest = new SessionWrapper();
             tempDataMock.Setup(t => t.ContainsKey(DECK_KEY)).Returns(true).Verifiable();
             tempDataMock.Setup(t => t[DECK_KEY]).Returns(serialized).Verifiable();
