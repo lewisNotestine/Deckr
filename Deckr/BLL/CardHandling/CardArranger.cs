@@ -6,12 +6,12 @@ namespace Deckr.BLL.CardHandling
 {
     internal class CardArranger : ICardArranger
     {
-        private readonly Func<IComparer<Card>> GetShufflerFunc;
+        private readonly IComparer<Card> Shuffler;
         private readonly IComparer<Card> Sorter;
 
-        public CardArranger(Func<IComparer<Card>> getShufflerFunc, IComparer<Card> sorter)
+        public CardArranger(IComparer<Card> shuffler, IComparer<Card> sorter)
         {
-            GetShufflerFunc = getShufflerFunc;
+            Shuffler = shuffler;
             Sorter = sorter;
         }
          
@@ -21,7 +21,7 @@ namespace Deckr.BLL.CardHandling
             {
                 throw new ArgumentNullException(nameof(input));
             }
-            input.Cards.Sort(GetShufflerFunc());
+            input.Cards.Sort(Shuffler);
         }
 
         public void SortDeck(Deck input)

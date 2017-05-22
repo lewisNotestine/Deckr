@@ -3,6 +3,8 @@ bin/
 obj/
 **/.vscode/
 
+*.vs/
+
 *.user
 *.min.js
 *.dll

@@ -38,7 +38,7 @@ namespace Deckr.Tests.BLL.CardHandling
 
             CardShufflerMock.Setup(c => c.Compare(It.IsAny<Card>(), It.IsAny<Card>())).Returns(-1).Verifiable();
                                 
-            var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+            var arrangerUnderTest = new CardArranger(CardShufflerMock.Object, CardSorterMock.Object);
             arrangerUnderTest.ShuffleDeck(deck);
 
             Assert.Collection<Card>(deck.Cards, c => Assert.True(c.Rank == Rank.Four), d => Assert.True(d.Rank == Rank.Three), e => Assert.True(e.Rank == Rank.Deuce));                                    
@@ -60,7 +60,7 @@ namespace Deckr.Tests.BLL.CardHandling
 
 			CardShufflerMock.Setup(c => c.Compare(It.IsAny<Card>(), It.IsAny<Card>())).Returns(1).Verifiable();
 
-			var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+			var arrangerUnderTest = new CardArranger(CardShufflerMock.Object, CardSorterMock.Object);
 			arrangerUnderTest.ShuffleDeck(deck);
 
 			Assert.Collection<Card>(deck.Cards, a => Assert.Equal(a.Rank,Rank.Six), b => Assert.Equal(b.Rank, Rank.Five), c => Assert.Equal(c.Rank, Rank.Four), d => Assert.Equal(d.Rank, Rank.Three), e => Assert.Equal(e.Rank, Rank.Deuce));
@@ -86,7 +86,7 @@ namespace Deckr.Tests.BLL.CardHandling
 
 			CardSorterMock.Setup(c => c.Compare(It.IsAny<Card>(), It.IsAny<Card>())).Returns(1).Verifiable();
 
-			var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+			var arrangerUnderTest = new CardArranger(CardShufflerMock.Object, CardSorterMock.Object);
 			arrangerUnderTest.SortDeck(deck);
 
             Assert.Collection<Card>(deck.Cards, c => Assert.True(c.Rank == Rank.Deuce), d => Assert.True(d.Rank == Rank.Three), e => Assert.True(e.Rank == Rank.Four));
@@ -98,7 +98,7 @@ namespace Deckr.Tests.BLL.CardHandling
         {
             Deck deck = null;
 
-            var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+            var arrangerUnderTest = new CardArranger(CardShufflerMock.Object, CardSorterMock.Object);
 
             Assert.Throws<ArgumentNullException>(() => arrangerUnderTest.ShuffleDeck(deck));
         }
@@ -108,7 +108,7 @@ namespace Deckr.Tests.BLL.CardHandling
         {
 			Deck deck = new Deck(null); ;
 
-			var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+			var arrangerUnderTest = new CardArranger(CardShufflerMock.Object, CardSorterMock.Object);
 
 			Assert.Throws<ArgumentNullException>(() => arrangerUnderTest.ShuffleDeck(deck));
         }
@@ -118,7 +118,7 @@ namespace Deckr.Tests.BLL.CardHandling
 		{
 			Deck deck = null;
 
-			var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+			var arrangerUnderTest = new CardArranger(CardShufflerMock.Object, CardSorterMock.Object);
 
             Assert.Throws<ArgumentNullException>(() => arrangerUnderTest.SortDeck(deck));
 		}
@@ -128,7 +128,7 @@ namespace Deckr.Tests.BLL.CardHandling
 		{
 			Deck deck = new Deck(null); ;
 
-			var arrangerUnderTest = new CardArranger(() => CardShufflerMock.Object, CardSorterMock.Object);
+			var arrangerUnderTest = new CardArranger(CardShufflerMock.Object, CardSorterMock.Object);
 
             Assert.Throws<ArgumentNullException>(() => arrangerUnderTest.SortDeck(deck));
 		}

@@ -6,27 +6,23 @@ namespace Deckr.BLL.CardHandling
 {
 
     internal class CardShuffler : IComparer<Card>
-	{
-        private readonly Func<int> SeedOne;
-        private readonly Func<int> SeedTwo;
-
+	{           
+        private readonly Random Randomizer;
+       
         public static CardShuffler GetDefault()
-        {
-            Func<int> nowTix = () => { return (int)DateTime.Now.Ticks % Int32.MaxValue; };
-            Func<int> nowNowTix = () => { return (int)DateTime.Now.Ticks % Int32.MaxValue; };
-            return new CardShuffler(nowTix, nowNowTix);
+        {                       
+            return new CardShuffler(Environment.TickCount);
         }
 
-        public CardShuffler(Func<int> seedOne, Func<int> seedTwo)
+        public CardShuffler(int seed)
         {
-            SeedOne = seedOne;
-            SeedTwo = seedTwo;
+            Randomizer = new Random(seed);
         }
 
 		public int Compare(Card x, Card y)
 		{
-			int rand1 = new Random(SeedOne()).Next();
-			int rand2 = new Random(SeedTwo()).Next();
+            int rand1 = Randomizer.Next();
+            int rand2 = Randomizer.Next();
 
 			return rand1.CompareTo(rand2);
 		}
